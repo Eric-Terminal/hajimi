@@ -213,7 +213,7 @@ async def startup_event():
         first_valid_key,
         settings.FAKE_STREAMING,
         settings.FAKE_STREAMING_INTERVAL,
-        settings.PASSWORD,
+        settings.PASSWORDS,
         settings.MAX_REQUESTS_PER_MINUTE,
         settings.MAX_REQUESTS_PER_DAY_PER_IP
     )
