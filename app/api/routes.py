@@ -143,11 +143,15 @@ async def aistudio_chat_completions(
         settings.MAX_REQUESTS_PER_MINUTE, 
         settings.MAX_REQUESTS_PER_DAY_PER_IP)
     
+    # 翻译模型名称
+    if request.model in settings.TRANSLATE_MODELS:
+        request.model = settings.TRANSLATE_MODELS[request.model]
+        log('INFO', f"模型名称已翻译为 {request.model}", extra={'model': request.model})
+
+    # 检查模型是否可用，如果不可用则使用默认模型
     if request.model not in GeminiClient.AVAILABLE_MODELS:
-        log('error', "无效的模型", 
-            extra={'model': request.model, 'status_code': 400})
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST, detail="无效的模型")
+        log('WARNING', f"模型 '{request.model}' 不可用, 将使用默认模型 'gemini-2.5-pro'", extra={'model': request.model})
+        request.model = "gemini-2.5-pro"
     
     
     # 记录请求缓存键信息
