@@ -149,6 +149,14 @@ class GeminiClient:
     def _convert_request_data(self, request, contents, safety_settings, system_instruction):
 
         model = request.model
+<<<<<<< HEAD
+=======
+        # 翻译模型名称
+        if model in settings.TRANSLATE_MODELS:
+            model = settings.TRANSLATE_MODELS[model]
+            log('INFO', f"模型名称已从 {request.model} 翻译为 {model}", extra={'key': self.api_key[:8], 'model':request.model})
+
+>>>>>>> d8fb82b (feat: Add model translation and multi-password support)
         format_type = getattr(request, 'format_type', None)
         if format_type and (format_type == "gemini"):
             api_version = "v1alpha" if "think" in request.model else "v1beta"
