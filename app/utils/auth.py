@@ -26,11 +26,8 @@ async def custom_verify_password(
         client_provided_api_key = token
 
     # 进行校验和比对
-<<<<<<< HEAD
-    if (not client_provided_api_key) or (client_provided_api_key != settings.PASSWORD) :
-=======
+
     if (not client_provided_api_key) or (client_provided_api_key not in settings.PASSWORDS) :
->>>>>>> d8fb82b (feat: Add model translation and multi-password support)
             raise HTTPException(
                 status_code=401, detail="Unauthorized: Invalid token")
 

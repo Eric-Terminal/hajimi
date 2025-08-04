@@ -6,13 +6,7 @@ import asyncio
 
 # ---------- 以下是基础配置信息 ----------
 
-<<<<<<< HEAD
-# 调用本项目时使用的密码
-PASSWORD = os.environ.get("PASSWORD", "123").strip('"') 
 
-# 网页配置密码，设置后，在网页修改配置时使用 WEB_PASSWORD 而不是上面的 PASSWORD
-WEB_PASSWORD = os.environ.get("WEB_PASSWORD", PASSWORD).strip('"') 
-=======
 # 调用本项目时使用的密码, 支持逗号分割的多个密码
 _password_str = os.environ.get("PASSWORD", "123").strip('"')
 PASSWORDS = {p.strip() for p in _password_str.split(',') if p.strip()}
@@ -21,7 +15,6 @@ PASSWORDS = {p.strip() for p in _password_str.split(',') if p.strip()}
 # If WEB_PASSWORD is not set, it defaults to the first password in the list, or an empty string if no passwords are set.
 _first_password = next(iter(PASSWORDS)) if PASSWORDS else ""
 WEB_PASSWORD = os.environ.get("WEB_PASSWORD", _first_password).strip('"')
->>>>>>> d8fb82b (feat: Add model translation and multi-password support)
 
 # API密钥
 GEMINI_API_KEYS = os.environ.get("GEMINI_API_KEYS", "")
@@ -88,8 +81,7 @@ WHITELIST_MODELS = { x.strip() for x in os.environ.get("WHITELIST_MODELS", "").s
 # 白名单User-Agent
 WHITELIST_USER_AGENT = { x.strip().lower() for x in os.environ.get("WHITELIST_USER_AGENT", "").split(",") if x.strip() }
 
-<<<<<<< HEAD
-=======
+
 # 模型名称翻译, 支持多个翻译规则
 # 环境变量格式: TRANSLATE_MODELS_ANYNAME=source_model,target_model
 TRANSLATE_MODELS = {}
@@ -100,7 +92,6 @@ for key, value in os.environ.items():
             source_model, target_model = parts
             TRANSLATE_MODELS[source_model] = target_model
 
->>>>>>> d8fb82b (feat: Add model translation and multi-password support)
 # 跨域配置
 # 允许的源列表，逗号分隔，例如 "http://localhost:3000,https://example.com"
 ALLOWED_ORIGINS_STR = os.environ.get("ALLOWED_ORIGINS", "")
@@ -146,8 +137,6 @@ FAKE_STREAMING_DELAY_PER_CHUNK = float(os.environ.get("FAKE_STREAMING_DELAY_PER_
 
 # 非流式请求TCP保活配置
 NONSTREAM_KEEPALIVE_ENABLED = os.environ.get("NONSTREAM_KEEPALIVE_ENABLED", "true").lower() in ["true", "1", "yes"]
-<<<<<<< HEAD
+
 NONSTREAM_KEEPALIVE_INTERVAL = float(os.environ.get("NONSTREAM_KEEPALIVE_INTERVAL", "5.0"))
-=======
-NONSTREAM_KEEPALIVE_INTERVAL = float(os.environ.get("NONSTREAM_KEEPALIVE_INTERVAL", "5.0"))
->>>>>>> d8fb82b (feat: Add model translation and multi-password support)
+
